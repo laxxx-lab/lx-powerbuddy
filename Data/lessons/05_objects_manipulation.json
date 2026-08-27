@@ -1,0 +1,35 @@
+﻿{
+    "Title":  "Level 5: Fortgeschrittene Objekt-Manipulation",
+    "Description":  "Berechnete Eigenschaften, ExpandProperty, Measure-Object und Gruppierungen.",
+    "Steps":  [
+                  {
+                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Select-Object|select)\\s+.*-ExpandProperty\\s+ProcessName.*$",
+                      "Theory":  "Wenn du nur den reinen Wert (z.B. den String oder Int) statt eines Objekts mit Tabellen-Header haben willst, nutze \u0027Select-Object -ExpandProperty \u003cName\u003e\u0027.",
+                      "ExplanationAfter":  "Perfekt! Du hast jetzt ein flaches Array aus Strings statt Tabellenobjekten.",
+                      "StepNumber":  1,
+                      "Hint":  "Tippe: Get-Process | Select-Object -ExpandProperty ProcessName -First 5",
+                      "Title":  "Werte extrahieren mit -ExpandProperty",
+                      "Task":  "Hole dir nur die reinen Prozessnamen als Strings: Get-Process | Select-Object -ExpandProperty ProcessName -First 5"
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Measure-Object|measure).*$",
+                      "Theory":  "\u0027Measure-Object\u0027 (Alias: measure) zählt Einträge und kann Min, Max, Sum und Average für numerische Eigenschaften berechnen.",
+                      "ExplanationAfter":  "Klasse! In der Eigenschaft \u0027Count\u0027 siehst du die genaue Anzahl deiner Prozesse.",
+                      "StepNumber":  2,
+                      "Hint":  "Tippe: Get-Process | Measure-Object",
+                      "Title":  "Messen und Rechnen mit Measure-Object",
+                      "Task":  "Zähle die Anzahl aller laufenden Prozesse mit: Get-Process | Measure-Object"
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Group-Object|group)\\s+.*ProcessName.*$",
+                      "Theory":  "\u0027Group-Object\u0027 (Alias: group) fasst Objekte mit gleichen Werten zusammen (wie GROUP BY in SQL).",
+                      "ExplanationAfter":  "Genial! Jetzt siehst du sofort, welche Programme die meisten separaten Prozesse laufen haben (z.B. Chrome, svchost).",
+                      "StepNumber":  3,
+                      "Hint":  "Tippe: Get-Process | Group-Object ProcessName | Sort-Object Count -Descending | Select-Object -First 5",
+                      "Title":  "Gruppieren mit Group-Object",
+                      "Task":  "Gruppiere Prozesse nach ihrem Namen: Get-Process | Group-Object ProcessName | Sort-Object Count -Descending | Select-Object -First 5"
+                  }
+              ],
+    "Id":  "05_objects_manipulation",
+    "Order":  5
+}

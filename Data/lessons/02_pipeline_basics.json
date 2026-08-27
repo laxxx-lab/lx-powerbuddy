@@ -1,0 +1,35 @@
+﻿{
+    "Title":  "Level 2: Das Herzstück - Die Objekt-Pipeline",
+    "Description":  "Verstehe, warum PowerShells Pipeline (|) so revolutionär ist: Hier fließen keine Textzeilen, sondern echte .NET-Objekte!",
+    "Steps":  [
+                  {
+                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Get-Member|gm).*$",
+                      "Theory":  "In klassischen Shells (Bash/CMD) gibt ein Befehl Text aus, der mühsam mit regex/cut/awk zerschnitten werden muss.\n\nIn PowerShell gibt ein Befehl ein OBJEKT aus. Das Pipe-Zeichen (|) übergibt dieses ganze Objekt an den nächsten Befehl.\n\nMit \u0027Get-Member\u0027 (Alias: gm) kannst du sofort sehen, welche Eigenschaften (.Properties) und Aktionen (.Methods) ein Objekt hat!",
+                      "ExplanationAfter":  "BAM! Schau dir die Liste an: Handles, Id, ProcessName, CPU, Kill(), Start()... all das kannst du direkt ansprechen!",
+                      "StepNumber":  1,
+                      "Hint":  "Tippe: Get-Process | Get-Member",
+                      "Title":  "Die Pipeline (|) und Get-Member",
+                      "Task":  "Untersuche die Eigenschaften von Get-Process mit: Get-Process | Get-Member"
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Select-Object|select)\\s+.*(Name.*Id|Id.*Name).*$",
+                      "Theory":  "Oft willst du nicht alle 50 Eigenschaften eines Objekts sehen, sondern nur bestimmte Spalten. Dafür gibt es \u0027Select-Object\u0027 (Alias: select).",
+                      "ExplanationAfter":  "Sehr gut! Du hast aus den komplexen Prozess-Objekten schlanke Objekte erzeugt, die nur noch Name und Id enthalten.",
+                      "StepNumber":  2,
+                      "Hint":  "Tippe: Get-Process | Select-Object Name, Id",
+                      "Title":  "Eigenschaften auswählen mit Select-Object",
+                      "Task":  "Wähle von Get-Process nur die Eigenschaften \u0027Name\u0027 und \u0027Id\u0027 aus."
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Select-Object|select)\\s+-First\\s+3.*$",
+                      "Theory":  "Mit dem Parameter \u0027-First\u0027 von Select-Object kannst du die Pipeline nach den ersten N Treffern stoppen (wie \u0027head\u0027 in Linux).",
+                      "ExplanationAfter":  "Exzellent! Das spart Rechenleistung, weil nach den ersten 3 Objekten die Verarbeitung gestoppt wird.",
+                      "StepNumber":  3,
+                      "Hint":  "Tippe: Get-Process | Select-Object -First 3",
+                      "Title":  "Erste N Elemente auswählen (-First)",
+                      "Task":  "Hole dir nur die ersten 3 Prozesse aus Get-Process."
+                  }
+              ],
+    "Id":  "02_pipeline_basics",
+    "Order":  2
+}

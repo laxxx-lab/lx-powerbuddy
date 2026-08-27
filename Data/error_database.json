@@ -1,0 +1,93 @@
+﻿[
+    {
+        "Pattern":  "is not recognized as the name of a cmdlet|wurde nicht als Name eines Cmdlet",
+        "Solutions":  [
+                          "Prüfe die Schreibweise mit: Get-Command *deinSuchbegriff*",
+                          "Skripte im aktuellen Ordner mit \u0027.\\\u0027 starten: .\\meinSkript.ps1",
+                          "Prüfe installierte Module: Get-Module -ListAvailable"
+                      ],
+        "ErrorType":  "CommandNotFoundException",
+        "Explanation":  "PowerShell kennt diesen Befehl, diese Funktion oder dieses Skript nicht.",
+        "Causes":  [
+                       "Tippfehler im Befehlsnamen.",
+                       "Das zuständige PowerShell-Modul ist noch nicht importiert oder installiert.",
+                       "Ein Skript im aktuellen Ordner wurde ohne \u0027.\\\u0027 aufgerufen (z.B. \u0027script.ps1\u0027 statt \u0027.\\script.ps1\u0027).",
+                       "Das Programm befindet sich nicht in deiner $env:PATH-Umgebungsvariable."
+                   ],
+        "Title":  "Befehl wurde nicht gefunden"
+    },
+    {
+        "Pattern":  "A parameter cannot be found that matches parameter name|Es wurde kein Parameter gefunden, der dem Parameternamen",
+        "Solutions":  [
+                          "Lass dir alle gültigen Parameter anzeigen: Get-Help \u003cCmdlet\u003e -Parameter *",
+                          "Nutze Tab-Vervollständigung (Tab-Taste), um Parameternamen automatisch zu ergänzen.",
+                          "Prüfe die Syntax-Varianten: Get-Command \u003cCmdlet\u003e -Syntax"
+                      ],
+        "ErrorType":  "ParameterBindingException",
+        "Explanation":  "Du hast einen Parameter übergeben, den das Cmdlet nicht unterstützt oder falsch versteht.",
+        "Causes":  [
+                       "Tippfehler beim Parameternamen (z.B. -Filter statt -Include).",
+                       "Ein Leerzeichen fehlt oder ist an falscher Stelle vor dem Bindestrich.",
+                       "Der Parameter existiert in diesem Parametersatz (Parameter Set) nicht."
+                   ],
+        "Title":  "Ungültiger Parameter oder falscher Typ"
+    },
+    {
+        "Pattern":  "execution of scripts is disabled on this system|Ausführung von Skripts ist auf diesem System deaktiviert",
+        "Solutions":  [
+                          "Erlaube Skriptausführung für deinen Benutzer: Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force",
+                          "Prüfe deine aktuelle Richtlinie: Get-ExecutionPolicy -List"
+                      ],
+        "ErrorType":  "PSSecurityException",
+        "Explanation":  "Windows verhindert standardmäßig das unkontrollierte Ausführen von .ps1-Skriptdateien aus Sicherheitsgründen.",
+        "Causes":  [
+                       "Die PowerShell ExecutionPolicy steht noch auf \u0027Restricted\u0027."
+                   ],
+        "Title":  "Skript-Ausführungsrichtlinie (ExecutionPolicy) blockiert"
+    },
+    {
+        "Pattern":  "Cannot find path|Pfad .* kann nicht gefunden werden",
+        "Solutions":  [
+                          "Prüfe dein aktuelles Verzeichnis: Get-Location (oder pwd)",
+                          "Prüfe die Existenz: Test-Path \u0027C:\\Dein\\Pfad\u0027",
+                          "Verwende Anführungszeichen: Get-Content \u0027C:\\Mein Ordner\\datei.txt\u0027"
+                      ],
+        "ErrorType":  "ItemNotFoundException",
+        "Explanation":  "Die Datei, der Ordner oder der Pfad existiert an dieser Stelle nicht.",
+        "Causes":  [
+                       "Tippfehler im Dateinamen oder Pfad.",
+                       "Der Pfad enthält Leerzeichen und wurde nicht in Anführungszeichen gesetzt.",
+                       "Du befindest dich in einem anderen Arbeitsverzeichnis als erwartet."
+                   ],
+        "Title":  "Pfad oder Datei nicht gefunden"
+    },
+    {
+        "Pattern":  "Access to the path .* is denied|Zugriff auf den Pfad .* wurde verweigert",
+        "Solutions":  [
+                          "Öffne PowerShell als Administrator (Rechtsklick -\u003e Als Administrator ausführen).",
+                          "Prüfe, ob ein anderes Programm die Datei gerade geöffnet hat.",
+                          "Prüfe Dateirechte mit: (Get-Acl \u0027datei.txt\u0027).Access"
+                      ],
+        "ErrorType":  "UnauthorizedAccessException",
+        "Explanation":  "PowerShell oder dein Benutzerkonto hat nicht die nötigen Rechte, um diese Datei oder Ressource zu lesen/schreiben.",
+        "Causes":  [
+                       "Der Vorgang erfordert Administrator-Rechte (z.B. Systemdienste ändern, C:\\Windows beschreiben).",
+                       "Die Datei ist schreibgeschützt oder von einem anderen Programm exklusiv gesperrt."
+                   ],
+        "Title":  "Zugriff verweigert (Berechtigung fehlt)"
+    },
+    {
+        "Pattern":  "You cannot call a method on a null-valued expression|Sie können für einen Ausdruck mit dem Wert NULL keine Methode aufrufen",
+        "Solutions":  [
+                          "Prüfe vor dem Aufruf, ob der Wert vorhanden ist: if ($null -ne $meineVar) { $meineVar.DoSomething() }",
+                          "Nutze den Null-Conditional Operator (in PS 7+): $meineVar?.DoSomething()"
+                      ],
+        "ErrorType":  "MethodInvocationException",
+        "Explanation":  "Du versuchst, eine Eigenschaft oder Methode (z.B. .Split() oder .Count) auf einer Variablen aufzurufen, die leer () ist.",
+        "Causes":  [
+                       "Der vorherige Befehl hat nichts zurückgegeben (kein Treffer).",
+                       "Die Variable wurde vorher nicht initialisiert oder falsch geschrieben."
+                   ],
+        "Title":  "Methode auf  (leerem Wert) aufgerufen"
+    }
+]

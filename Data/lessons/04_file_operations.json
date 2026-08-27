@@ -1,0 +1,53 @@
+﻿{
+    "Title":  "Level 4: Dateisystem \u0026 Textdateien beherrschen",
+    "Description":  "Dateien erstellen, schreiben, lesen, suchen und sicher löschen.",
+    "Steps":  [
+                  {
+                      "ExpectedCommandPattern":  "^(New-Item|ni)\\s+.*buddy_test\\.txt.*$",
+                      "Theory":  "\u0027New-Item\u0027 (Alias: ni) ist der Allrounder zum Erstellen von Dateien (-ItemType File) oder Ordnern (-ItemType Directory). Mit -Value kannst du direkt Start-Inhalt mitgeben.",
+                      "ExplanationAfter":  "Datei angelegt! New-Item gibt dir direkt das FileInfo-Objekt der neuen Datei zurück.",
+                      "StepNumber":  1,
+                      "Hint":  "Tippe: New-Item -Path .\\buddy_test.txt -ItemType File -Value \u0027Hallo PowerBuddy!\u0027",
+                      "Title":  "Dateien und Ordner erstellen: New-Item",
+                      "Task":  "Erstelle eine neue Testdatei \u0027buddy_test.txt\u0027 mit: New-Item -Path .\\buddy_test.txt -ItemType File -Value \u0027Hallo PowerBuddy!\u0027"
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^(Get-Content|gc|cat|type)\\s+.*buddy_test\\.txt.*$",
+                      "Theory":  "\u0027Get-Content\u0027 (Alias: gc, cat) liest Dateien. Standardmäßig liefert es ein Array von Strings (eine Zeile pro Element). Mit -Raw liest es alles in einen String.",
+                      "ExplanationAfter":  "Genau so! \u0027Hallo PowerBuddy!\u0027 wurde ausgegeben.",
+                      "StepNumber":  2,
+                      "Hint":  "Tippe: Get-Content .\\buddy_test.txt",
+                      "Title":  "Dateien lesen mit Get-Content",
+                      "Task":  "Lies den Inhalt der eben erstellten Datei mit: Get-Content .\\buddy_test.txt"
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^(Add-Content|ac)\\s+.*buddy_test\\.txt.*$",
+                      "Theory":  "Während \u0027Set-Content\u0027 den Inhalt überschreibt, hängt \u0027Add-Content\u0027 eine neue Zeile an das Ende der Datei an.",
+                      "ExplanationAfter":  "Super! Wenn du Get-Content ausführst, siehst du jetzt beide Zeilen.",
+                      "StepNumber":  3,
+                      "Hint":  "Tippe: Add-Content -Path .\\buddy_test.txt -Value \u0027Zeile 2\u0027",
+                      "Title":  "Text anhängen mit Add-Content",
+                      "Task":  "Hänge eine zweite Zeile an mit: Add-Content -Path .\\buddy_test.txt -Value \u0027Zeile 2\u0027"
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^(Test-Path)\\s+.*buddy_test\\.txt.*$",
+                      "Theory":  "\u0027Test-Path\u0027 gibt einfach True oder False zurück. Ideal für Skripte und If-Bedingungen.",
+                      "ExplanationAfter":  "True! Du weißt jetzt sicher, dass die Datei existiert.",
+                      "StepNumber":  4,
+                      "Hint":  "Tippe: Test-Path .\\buddy_test.txt",
+                      "Title":  "Existenz prüfen mit Test-Path",
+                      "Task":  "Prüfe die Datei: Test-Path .\\buddy_test.txt"
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^(Remove-Item|rm|del|ri|erase)\\s+.*buddy_test\\.txt.*$",
+                      "Theory":  "Lösche Dateien mit \u0027Remove-Item\u0027 (Alias: rm, del, ri).",
+                      "ExplanationAfter":  "Sauber aufgeräumt! Die Datei ist weg.",
+                      "StepNumber":  5,
+                      "Hint":  "Tippe: Remove-Item .\\buddy_test.txt",
+                      "Title":  "Aufräumen mit Remove-Item",
+                      "Task":  "Lösche die Testdatei wieder: Remove-Item .\\buddy_test.txt"
+                  }
+              ],
+    "Id":  "04_file_operations",
+    "Order":  4
+}

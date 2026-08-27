@@ -1,0 +1,35 @@
+﻿{
+    "Title":  "Level 6: Variablen, Schleifen \u0026 Eigene Funktionen",
+    "Description":  "Schreibe deine ersten Skripte, nutze Variablen und baue wiederverwendbare PowerShell-Funktionen.",
+    "Steps":  [
+                  {
+                      "ExpectedCommandPattern":  "^\\\\s*=\\s*(Get-Process|ps|gps).*$",
+                      "Theory":  "In PowerShell beginnen alle Variablen mit einem Dollarzeichen ($). Du kannst beliebige Werte oder ganze Objekt-Sammlungen in Variablen speichern.\n\nBeispiel:  = Get-ChildItem",
+                      "ExplanationAfter":  "Super! Jetzt kannst du mit $meineProzesse.Count oder $meineProzesse[0] direkt auf die Daten zugreifen.",
+                      "StepNumber":  1,
+                      "Hint":  "Tippe: $meineProzesse = Get-Process",
+                      "Title":  "Variablen in PowerShell",
+                      "Task":  "Speichere deine Prozesse in einer Variablen: $meineProzesse = Get-Process"
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^(1\\.\\.5)\\s*\\|\\s*(ForEach-Object|foreach|%)\\s*\\{\\s*.*$_.*\\}$",
+                      "Theory":  "Mit \u0027ForEach-Object\u0027 (Alias: % oder foreach) führst du einen Skriptblock { ... } für jedes einzelne Objekt in der Pipeline aus. Die aktuelle Variable in der Pipeline heißt immer \u0027\u0027 (oder $PSItem).",
+                      "ExplanationAfter":  "Wunderbar! \u00271..5\u0027 erzeugt den Zahlenbereich und ForEach-Object verarbeitet jedes Element einzeln.",
+                      "StepNumber":  2,
+                      "Hint":  "Tippe: 1..5 | ForEach-Object { \"Zahl: $_\" }",
+                      "Title":  "Schleifen mit ForEach-Object (%)",
+                      "Task":  "Führe aus: 1..5 | ForEach-Object { \"Zahl: $_\" }"
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^function\\s+Sag-Hallo\\s*\\{.*\\}$",
+                      "Theory":  "Du kannst dir eigene Befehle definieren:\nfunction Sag-Hallo { param($Name) Write-Host \"Moin $Name!\" -ForegroundColor Green }",
+                      "ExplanationAfter":  "HERZLICHEN GLÜCKWUNSCH! Du hast deine erste eigene Funktion gebaut! Du kannst sie jetzt mit \u0027Sag-Hallo -Name DeinName\u0027 ausführen.",
+                      "StepNumber":  3,
+                      "Hint":  "Tippe: function Sag-Hallo { param($Name=\u0027PowerBuddy\u0027) Write-Host \"Moin $Name!\" }",
+                      "Title":  "Eine eigene Funktion definieren",
+                      "Task":  "Definiere deine Funktion: function Sag-Hallo { param($Name=\u0027PowerBuddy\u0027) Write-Host \"Moin $Name!\" }"
+                  }
+              ],
+    "Id":  "06_scripting_functions",
+    "Order":  6
+}

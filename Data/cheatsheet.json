@@ -1,0 +1,271 @@
+﻿[
+    {
+        "WindowsCmd":  "dir",
+        "Aliases":  [
+                        "gci",
+                        "dir",
+                        "ls"
+                    ],
+        "Example":  "Get-ChildItem -Path C:\\ -Recurse -File",
+        "Category":  "Dateisystem",
+        "KeyDifference":  "In Linux/CMD bekommst du Textzeilen. In PowerShell erhältst du Objekte mit Eigenschaften wie .Length, .LastWriteTime, .Extension.",
+        "Description":  "Listet Dateien und Verzeichnisse auf. Gibt echte FileInfo-Objekte zurück, keinen reinen Text.",
+        "UnixCmd":  "ls",
+        "PSCmdlet":  "Get-ChildItem"
+    },
+    {
+        "WindowsCmd":  "findstr",
+        "Aliases":  [
+                        "sls"
+                    ],
+        "Example":  "Get-Content app.log | Select-String -Pattern \"ERROR\" -SimpleMatch",
+        "Category":  "Textsuche",
+        "KeyDifference":  "Gibt MatchInfo-Objekte zurück mit Zeilennummer, Dateiname und Trefferzeile.",
+        "Description":  "Sucht nach Mustern (inkl. Regex) in Texten oder Dateien.",
+        "UnixCmd":  "grep",
+        "PSCmdlet":  "Select-String"
+    },
+    {
+        "WindowsCmd":  "type",
+        "Aliases":  [
+                        "gc",
+                        "cat",
+                        "type"
+                    ],
+        "Example":  "Get-Content -Path .\\config.json -Raw",
+        "Category":  "Dateisystem",
+        "KeyDifference":  "Mit -Raw wird die ganze Datei als ein einziger String gelesen, sonst als Array von Zeilen.",
+        "Description":  "Liest den Inhalt einer Datei (standardmäßig zeilenweise als Array von Strings).",
+        "UnixCmd":  "cat",
+        "PSCmdlet":  "Get-Content"
+    },
+    {
+        "WindowsCmd":  "del",
+        "Aliases":  [
+                        "ri",
+                        "rm",
+                        "del",
+                        "erase"
+                    ],
+        "Example":  "Remove-Item -Path .\\temp -Recurse -Force -WhatIf",
+        "Category":  "Dateisystem",
+        "KeyDifference":  "Unterstützt -WhatIf (Simulation) und kann auch Registry-Keys oder Variablen löschen!",
+        "Description":  "Löscht Dateien, Verzeichnisse oder Registry-Schlüssel.",
+        "UnixCmd":  "rm",
+        "PSCmdlet":  "Remove-Item"
+    },
+    {
+        "WindowsCmd":  "copy",
+        "Aliases":  [
+                        "cpi",
+                        "cp",
+                        "copy"
+                    ],
+        "Example":  "Copy-Item -Path .\\src\\* -Destination .\\dist\\ -Recurse",
+        "Category":  "Dateisystem",
+        "KeyDifference":  "Funktioniert provider-übergreifend (z.B. auch in Zertifikat- oder Registry-Pfaden).",
+        "Description":  "Kopiert Dateien oder Ordner an einen neuen Zielort.",
+        "UnixCmd":  "cp",
+        "PSCmdlet":  "Copy-Item"
+    },
+    {
+        "WindowsCmd":  "move",
+        "Aliases":  [
+                        "mi",
+                        "mv",
+                        "move"
+                    ],
+        "Example":  "Move-Item -Path .\\alt.txt -Destination .\\neu.txt",
+        "Category":  "Dateisystem",
+        "KeyDifference":  "Einheitlicher Befehl für Umbenennen und Verschieben.",
+        "Description":  "Verschiebt oder benennt Dateien und Ordner um.",
+        "UnixCmd":  "mv",
+        "PSCmdlet":  "Move-Item"
+    },
+    {
+        "WindowsCmd":  "echo. \u003e file",
+        "Aliases":  [
+                        "ni"
+                    ],
+        "Example":  "New-Item -Path .\\neueDatei.txt -ItemType File",
+        "Category":  "Dateisystem",
+        "KeyDifference":  "Der Typ wird über -ItemType (File, Directory, SymbolicLink) bestimmt.",
+        "Description":  "Erstellt eine neue leere Datei oder einen Ordner.",
+        "UnixCmd":  "touch",
+        "PSCmdlet":  "New-Item"
+    },
+    {
+        "WindowsCmd":  "md",
+        "Aliases":  [
+                        "mkdir",
+                        "md"
+                    ],
+        "Example":  "New-Item -Path .\\MeinOrdner -ItemType Directory",
+        "Category":  "Dateisystem",
+        "KeyDifference":  "mkdir ist in PowerShell eine Funktion, die \u0027New-Item -ItemType Directory\u0027 kapselt.",
+        "Description":  "Erstellt ein neues Verzeichnis.",
+        "UnixCmd":  "mkdir",
+        "PSCmdlet":  "New-Item"
+    },
+    {
+        "WindowsCmd":  "echo",
+        "Aliases":  [
+                        "echo",
+                        "write"
+                    ],
+        "Example":  "Write-Output \"In die Pipeline\" | Write-Host -ForegroundColor Cyan",
+        "Category":  "Ausgabe",
+        "KeyDifference":  "Achtung: Write-Output landet in Variablen oder Pipes, Write-Host nur in der Konsole.",
+        "Description":  "Write-Output sendet Objekte in die Pipeline; Write-Host schreibt direkt auf den Bildschirm.",
+        "UnixCmd":  "echo",
+        "PSCmdlet":  "Write-Output / Write-Host"
+    },
+    {
+        "WindowsCmd":  "tasklist",
+        "Aliases":  [
+                        "gps",
+                        "ps"
+                    ],
+        "Example":  "Get-Process | Where-Object CPU -gt 10 | Sort-Object CPU -Descending",
+        "Category":  "Prozesse",
+        "KeyDifference":  "Du kannst direkt auf .Kill(), .Modules, .Id, .CPU, .WorkingSet zugreifen!",
+        "Description":  "Listet laufende Prozesse als System.Diagnostics.Process-Objekte auf.",
+        "UnixCmd":  "ps",
+        "PSCmdlet":  "Get-Process"
+    },
+    {
+        "WindowsCmd":  "taskkill",
+        "Aliases":  [
+                        "spps",
+                        "kill"
+                    ],
+        "Example":  "Stop-Process -Name notepad -Force",
+        "Category":  "Prozesse",
+        "KeyDifference":  "Kann direkt aus Get-Process gepiped werden: Get-Process notepad | Stop-Process",
+        "Description":  "Beendet laufende Prozesse per ID oder Name.",
+        "UnixCmd":  "kill",
+        "PSCmdlet":  "Stop-Process"
+    },
+    {
+        "WindowsCmd":  "curl",
+        "Aliases":  [
+                        "irm",
+                        "iwr"
+                    ],
+        "Example":  "(Invoke-RestMethod -Uri \u0027https://api.github.com/users/octocat\u0027).public_repos",
+        "Category":  "Netzwerk",
+        "KeyDifference":  "Kein manuelles Parsen von JSON nötig! JSON-Responses sind sofort navigierbare Objekte.",
+        "Description":  "Sendet HTTP/REST-Requests. Invoke-RestMethod konvertiert JSON/XML automatisch in PowerShell-Objekte.",
+        "UnixCmd":  "curl / wget",
+        "PSCmdlet":  "Invoke-RestMethod / Invoke-WebRequest"
+    },
+    {
+        "WindowsCmd":  "more (teilweise)",
+        "Aliases":  [
+                        "select"
+                    ],
+        "Example":  "Get-ChildItem | Select-Object -First 5",
+        "Category":  "Pipeline",
+        "KeyDifference":  "Funktioniert auf Objekten, nicht nur Textzeilen.",
+        "Description":  "Gibt die ersten N Elemente einer Pipeline oder Zeilen aus.",
+        "UnixCmd":  "head",
+        "PSCmdlet":  "Select-Object -First"
+    },
+    {
+        "WindowsCmd":  "tail (nicht nativ)",
+        "Aliases":  [
+                        "gc"
+                    ],
+        "Example":  "Get-Content -Path .\\app.log -Tail 20 -Wait",
+        "Category":  "Dateisystem",
+        "KeyDifference":  "Perfekt für Live-Log-Monitoring wie \u0027tail -f\u0027 unter Linux.",
+        "Description":  "Liest die letzten N Zeilen einer Datei und wartet optional live auf neue Zeilen (-Wait).",
+        "UnixCmd":  "tail",
+        "PSCmdlet":  "Get-Content -Tail -Wait"
+    },
+    {
+        "WindowsCmd":  "find /c",
+        "Aliases":  [
+                        "measure"
+                    ],
+        "Example":  "Get-Process | Measure-Object -Property WS -Sum -Average",
+        "Category":  "Pipeline",
+        "KeyDifference":  "Kann mathematische Berechnungen auf Objekteigenschaften direkt durchführen.",
+        "Description":  "Zählt Elemente, Zeilen, Wörter oder berechnet Summen/Mittelwerte von Objekt-Eigenschaften.",
+        "UnixCmd":  "wc -l",
+        "PSCmdlet":  "Measure-Object"
+    },
+    {
+        "WindowsCmd":  "sort",
+        "Aliases":  [
+                        "sort"
+                    ],
+        "Example":  "Get-ChildItem | Sort-Object Length -Descending",
+        "Category":  "Pipeline",
+        "KeyDifference":  "Sortiert nach echten Datentypen (z.B. Zahlen als Zahlen, Datumsangaben chronologisch, nicht alphabetisch).",
+        "Description":  "Sortiert Objekte nach beliebigen Eigenschaften (aufsteigend oder absteigend).",
+        "UnixCmd":  "sort",
+        "PSCmdlet":  "Sort-Object"
+    },
+    {
+        "WindowsCmd":  "sort /unique",
+        "Aliases":  [
+                        "select"
+                    ],
+        "Example":  "@(1, 2, 2, 3, 3, 3) | Select-Object -Unique",
+        "Category":  "Pipeline",
+        "KeyDifference":  "Funktioniert auf einfachen Werten und ganzen Objekten.",
+        "Description":  "Entfernt Duplikate aus der Pipeline.",
+        "UnixCmd":  "uniq",
+        "PSCmdlet":  "Select-Object -Unique"
+    },
+    {
+        "WindowsCmd":  "where",
+        "Aliases":  [
+                        "gcm"
+                    ],
+        "Example":  "Get-Command -Noun Process",
+        "Category":  "Hilfe \u0026 Discovery",
+        "KeyDifference":  "Unterstützt Wildcards für Verben und Nomen: Get-Command *-Service",
+        "Description":  "Findet Cmdlets, Funktionen, Aliase, Skripte oder ausführbare Programme.",
+        "UnixCmd":  "which / whereis",
+        "PSCmdlet":  "Get-Command"
+    },
+    {
+        "WindowsCmd":  "help",
+        "Aliases":  [
+                        "help"
+                    ],
+        "Example":  "Get-Help Get-Process -Examples",
+        "Category":  "Hilfe \u0026 Discovery",
+        "KeyDifference":  "Mit -Examples erhältst du sofort funktionierende Praxis-Codebeispiele.",
+        "Description":  "Zeigt die offizielle Dokumentation, Parameter und Praxis-Beispiele an.",
+        "UnixCmd":  "man",
+        "PSCmdlet":  "Get-Help"
+    },
+    {
+        "WindowsCmd":  "ipconfig",
+        "Aliases":  [
+                        "Get-NetIPConfiguration",
+                        "gip"
+                    ],
+        "Example":  "Get-NetIPAddress -AddressFamily IPv4 | Where-Object IPAddress -notlike \u0027127.*\u0027",
+        "Category":  "Netzwerk",
+        "KeyDifference":  "Strukturiertes Objekt statt unstrukturierter Textblock von ipconfig.",
+        "Description":  "Listet Netzwerkadapter und IP-Konfigurationen auf.",
+        "UnixCmd":  "ifconfig / ip a",
+        "PSCmdlet":  "Get-NetIPAddress"
+    },
+    {
+        "WindowsCmd":  "wmic logicaldisk",
+        "Aliases":  [
+                        "Get-Volume"
+                    ],
+        "Example":  "Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{N=\u0027FreeGB\u0027; E={[math]::Round($_.Free / 1GB, 2)}}",
+        "Category":  "System",
+        "KeyDifference":  "In PowerShell sind auch Registry (HKLM:, HKCU:), Variablen (Variable:) und Zertifikate (Cert:) wie Laufwerke ansprechbar!",
+        "Description":  "Zeigt Speicherplatz und Kapazität der Laufwerke an.",
+        "UnixCmd":  "df -h",
+        "PSCmdlet":  "Get-PSDrive -PSProvider FileSystem"
+    }
+]

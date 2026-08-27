@@ -1,0 +1,20 @@
+# PowerShell temporary files and logs
+*.log
+*.tmp
+*.bak
+*~
+
+# Test & Coverage artifacts
+TestResults.xml
+coverage.xml
+
+# User progress & local settings
+.lxpowerbuddy/
+local_test/
+
+# OS and Editor files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

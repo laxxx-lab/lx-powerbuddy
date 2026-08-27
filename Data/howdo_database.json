@@ -1,0 +1,186 @@
+﻿[
+    {
+        "Id":  "find-files-by-ext",
+        "Explanation":  "Sucht im aktuellen Verzeichnis und allen Unterordnern nach Dateien mit der Endung .log.",
+        "Keywords":  [
+                         "dateien",
+                         "finden",
+                         "suchen",
+                         "endung",
+                         "extension",
+                         "rekursiv",
+                         "find",
+                         "search"
+                     ],
+        "Command":  "Get-ChildItem -Path . -Recurse -Filter \"*.log\"",
+        "Tip":  "Nutze -File, um Ordner auszuschließen: Get-ChildItem -Path . -Recurse -Filter \u0027*.log\u0027 -File",
+        "Category":  "Dateisystem",
+        "Title":  "Dateien nach Dateiendung rekursiv finden"
+    },
+    {
+        "Id":  "find-large-files",
+        "Explanation":  "Findet die 10 größten Dateien über 100MB und formatiert die Größe in MB.",
+        "Keywords":  [
+                         "große",
+                         "dateien",
+                         "speicherplatz",
+                         "speicherfresser",
+                         "large",
+                         "size",
+                         "sortieren"
+                     ],
+        "Command":  "Get-ChildItem -Path C:\\ -Recurse -File -ErrorAction SilentlyContinue | Where-Object Length -gt 100MB | Sort-Object Length -Descending | Select-Object -First 10 FullName, @{N=\"SizeMB\"; E={[math]::Round($_.Length / 1MB, 2)}}",
+        "Tip":  "PowerShell versteht Einheiten wie 1KB, 1MB, 1GB und 1TB direkt in Zahlenwerten!",
+        "Category":  "Dateisystem",
+        "Title":  "Große Dateien (z.B. \u003e 100MB) finden und sortieren"
+    },
+    {
+        "Id":  "replace-text-in-files",
+        "Explanation":  "Liest die Datei in den Speicher, ersetzt alle Vorkommnisse mit Regex-Unterstützung und speichert zurück.",
+        "Keywords":  [
+                         "text",
+                         "ersetzen",
+                         "suchen",
+                         "replace",
+                         "sed",
+                         "inhalt"
+                     ],
+        "Command":  "(Get-Content .\\config.txt) -replace \"alt_wert\", \"neu_wert\" | Set-Content .\\config.txt",
+        "Tip":  "Klammern um Get-Content stellen sicher, dass die Datei vor dem Schreiben geschlossen wird.",
+        "Category":  "Dateisystem",
+        "Title":  "Text in mehreren Dateien suchen und ersetzen"
+    },
+    {
+        "Id":  "test-port-connectivity",
+        "Explanation":  "Prüft DNS-Auflösung, Ping und ob der angegebene TCP-Port geöffnet ist (TcpTestSucceeded).",
+        "Keywords":  [
+                         "port",
+                         "ping",
+                         "netzwerk",
+                         "verbindung",
+                         "testen",
+                         "erreichbar",
+                         "test",
+                         "telnet"
+                     ],
+        "Command":  "Test-NetConnection -ComputerName \"google.com\" -Port 443",
+        "Tip":  "Alias: tnc google.com -p 443",
+        "Category":  "Netzwerk",
+        "Title":  "Netzwerkverbindung / Port-Erreichbarkeit testen (Ping/Telnet-Ersatz)"
+    },
+    {
+        "Id":  "fetch-json-api",
+        "Explanation":  "Sendet einen GET-Request und wandelt JSON automatisch in ein PowerShell Custom Object um. Zugriff z.B. über $data.stargazers_count.",
+        "Keywords":  [
+                         "api",
+                         "json",
+                         "rest",
+                         "curl",
+                         "http",
+                         "web",
+                         "abfragen",
+                         "request"
+                     ],
+        "Command":  "$data = Invoke-RestMethod -Uri \"https://api.github.com/repos/powershell/powershell\"",
+        "Tip":  "Für POST-Requests: Invoke-RestMethod -Uri  -Method Post -Body ( | ConvertTo-Json) -ContentType \u0027application/json\u0027",
+        "Category":  "Netzwerk",
+        "Title":  "REST-API abfragen und JSON direkt als Objekt verarbeiten"
+    },
+    {
+        "Id":  "kill-process-by-name",
+        "Explanation":  "Sucht alle Instanzen des Prozesses und beendet sie sofort ohne Rückfrage.",
+        "Keywords":  [
+                         "prozess",
+                         "beenden",
+                         "kill",
+                         "stoppen",
+                         "task",
+                         "schließen"
+                     ],
+        "Command":  "Get-Process -Name \"notepad\" -ErrorAction SilentlyContinue | Stop-Process -Force",
+        "Tip":  "Nutze -WhatIf, um vorher zu prüfen, was beendet werden würde: Stop-Process -Name notepad -WhatIf",
+        "Category":  "Prozesse",
+        "Title":  "Prozesse anhand des Namens sicher beenden"
+    },
+    {
+        "Id":  "export-import-csv",
+        "Explanation":  "Exportiert die ausgewählten Eigenschaften als saubere CSV-Datei ohne Typ-Header.",
+        "Keywords":  [
+                         "csv",
+                         "export",
+                         "import",
+                         "tabelle",
+                         "excel",
+                         "speichern"
+                     ],
+        "Command":  "Get-Process | Select-Object Name, Id, CPU, WS | Export-Csv -Path \".\\processes.csv\" -NoTypeInformation -Encoding UTF8",
+        "Tip":  "Wieder einlesen:  = Import-Csv -Path \u0027.\\processes.csv\u0027",
+        "Category":  "Daten",
+        "Title":  "Daten als CSV exportieren und wieder einlesen"
+    },
+    {
+        "Id":  "zip-unzip",
+        "Explanation":  "Erstellt ein Standard-ZIP-Archiv aus dem angegebenen Ordner.",
+        "Keywords":  [
+                         "zip",
+                         "komprimieren",
+                         "entpacken",
+                         "archiv",
+                         "unzip",
+                         "tar"
+                     ],
+        "Command":  "Compress-Archive -Path .\\MeinOrdner\\* -DestinationPath .\\Archiv.zip -Force",
+        "Tip":  "Entpacken mit: Expand-Archive -Path .\\Archiv.zip -DestinationPath .\\Entpackt -Force",
+        "Category":  "Dateisystem",
+        "Title":  "Dateien oder Ordner zippen und entpacken"
+    },
+    {
+        "Id":  "clipboard-io",
+        "Explanation":  "Kopiert die formatierten Ausgaben direkt in das Windows Clipboard (Strg+V).",
+        "Keywords":  [
+                         "zwischenablage",
+                         "clipboard",
+                         "kopieren",
+                         "einfügen",
+                         "copy",
+                         "paste"
+                     ],
+        "Command":  "Get-Process | Select-Object -First 5 Name, CPU | Set-Clipboard",
+        "Tip":  "Zwischenablage auslesen mit: Get-Clipboard",
+        "Category":  "System",
+        "Title":  "Daten in die Zwischenablage kopieren oder daraus lesen"
+    },
+    {
+        "Id":  "system-uptime",
+        "Explanation":  "Liest den genauen Zeitstempel des letzten Systemstarts aus WMI/CIM aus.",
+        "Keywords":  [
+                         "uptime",
+                         "boot",
+                         "laufzeit",
+                         "neustart",
+                         "system",
+                         "wie lange läuft"
+                     ],
+        "Command":  "(Get-CimInstance -ClassName Win32_OperatingSystem).LastBootUpTime",
+        "Tip":  "Berechnung der Uptime: (Get-Date) - (Get-CimInstance Win32_OperatingSystem).LastBootUpTime",
+        "Category":  "System",
+        "Title":  "System-Laufzeit / Letzten Boot-Zeitpunkt ermitteln"
+    },
+    {
+        "Id":  "inspect-object-properties",
+        "Explanation":  "Get-Member (Alias: gm) ist das wichtigste Werkzeug in PowerShell, um herauszufinden, was ein Objekt enthält.",
+        "Keywords":  [
+                         "eigenschaften",
+                         "methoden",
+                         "get-member",
+                         "objekt",
+                         "untersuchen",
+                         "was kann das objekt",
+                         "properties"
+                     ],
+        "Command":  "$datei = Get-Item .\\README.md; $datei | Get-Member",
+        "Tip":  "Nur Eigenschaften anzeigen:  | Get-Member -MemberType Property, NoteProperty",
+        "Category":  "PowerShell Power",
+        "Title":  "Alle versteckten Eigenschaften \u0026 Methoden eines Objekts anzeigen"
+    }
+]

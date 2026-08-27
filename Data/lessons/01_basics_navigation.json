@@ -1,0 +1,44 @@
+﻿{
+    "Title":  "Level 1: Grundlagen, Navigation \u0026 Hilfe",
+    "Description":  "Lerne die Verb-Noun Syntax von PowerShell kennen, wie du dich im Dateisystem bewegst und wie du dir selbst hilfst.",
+    "Steps":  [
+                  {
+                      "ExpectedCommandPattern":  "^(Get-Location|pwd|gl)(\\s*)$",
+                      "Theory":  "In PowerShell heißen fast alle Befehle nach dem Prinzip \u0027Verb-Nomen\u0027 (z.B. Get-Process, Start-Service, New-Item). Das macht die PowerShell extrem einheitlich und vorhersehbar.\n\nDer Befehl, um deinen aktuellen Pfad abzufragen, lautet \u0027Get-Location\u0027 (bekannt als \u0027pwd\u0027 in Linux).",
+                      "ExplanationAfter":  "Super! Du hast dein erstes echtes PowerShell-Cmdlet ausgeführt. Get-Location liefert ein PathInfo-Objekt zurück.",
+                      "StepNumber":  1,
+                      "Hint":  "Tippe einfach: Get-Location",
+                      "Title":  "Die Verb-Noun Syntax \u0026 Get-Location",
+                      "Task":  "Führe den Befehl \u0027Get-Location\u0027 aus, um dein aktuelles Verzeichnis zu sehen."
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^(Get-ChildItem|gci|dir|ls)(\\s*.*)?$",
+                      "Theory":  "Anstelle von \u0027dir\u0027 (CMD) oder \u0027ls\u0027 (Linux) nutzt PowerShell \u0027Get-ChildItem\u0027. Du kannst Parameter mit einem Bindestrich übergeben, z.B. -Path oder -Filter.",
+                      "ExplanationAfter":  "Klasse! Beachte die Spalten: Mode, LastWriteTime, Length und Name. Das sind echte Objekteigenschaften!",
+                      "StepNumber":  2,
+                      "Hint":  "Tippe: Get-ChildItem",
+                      "Title":  "Dateien auflisten mit Get-ChildItem",
+                      "Task":  "Liste den Inhalt des aktuellen Ordners mit \u0027Get-ChildItem\u0027 auf."
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^(Get-Help|help|man)\\s+Get-Process.*$",
+                      "Theory":  "Du musst Befehle nicht auswendig lernen. Mit \u0027Get-Help \u003cCmdlet\u003e\u0027 kannst du die Dokumentation jedes Befehls einsehen. Besonders nützlich ist \u0027Get-Help \u003cCmdlet\u003e -Examples\u0027 für Code-Beispiele.",
+                      "ExplanationAfter":  "Perfekt! Die Hilfe zeigt dir Syntax, Beschreibung, verwandte Links und Beispiele.",
+                      "StepNumber":  3,
+                      "Hint":  "Tippe: Get-Help Get-Process",
+                      "Title":  "Hilfe zu Befehlen finden: Get-Help",
+                      "Task":  "Lass dir die Hilfe für \u0027Get-Process\u0027 anzeigen."
+                  },
+                  {
+                      "ExpectedCommandPattern":  "^(Get-Command|gcm)\\s+.*-Service.*$",
+                      "Theory":  "Wenn du nicht genau weißt, wie ein Befehl heißt, hilft dir \u0027Get-Command\u0027. Mit Wildcards wie \u0027*\u0027 kannst du nach Verben oder Nomen suchen (z.B. Get-Command *-Service).",
+                      "ExplanationAfter":  "Genial! Du siehst Get-Service, Start-Service, Stop-Service, Restart-Service usw. Alle folgen derselben Systematik!",
+                      "StepNumber":  4,
+                      "Hint":  "Tippe: Get-Command *-Service",
+                      "Title":  "Befehle entdecken mit Get-Command",
+                      "Task":  "Finde alle Befehle, die mit dem Nomen \u0027Service\u0027 arbeiten."
+                  }
+              ],
+    "Id":  "01_basics_navigation",
+    "Order":  1
+}
