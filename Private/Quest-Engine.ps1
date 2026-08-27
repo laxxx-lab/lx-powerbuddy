@@ -1,4 +1,4 @@
-# Private/Quest-Engine.ps1
+﻿# Private/Quest-Engine.ps1
 
 function Get-LXProgressFilePath {
     $dir = Join-Path -Path $HOME -ChildPath ".lxpowerbuddy"
@@ -12,7 +12,13 @@ function Get-LXProgress {
     $file = Get-LXProgressFilePath
     if (Test-Path $file) {
         try {
-            return (Get-Content $file -Raw -Encoding UTF8 | ConvertFrom-Json)
+            $data = Get-Content $file -Raw -Encoding UTF8 | ConvertFrom-Json
+            if (-not $data.CompletedLessons) { $data.CompletedLessons = @() }
+            if (-not $data.CompletedSteps) { $data.CompletedSteps = @() }
+            if ($data.CompletedSteps -isnot [System.Array]) {
+                $data.CompletedSteps = @($data.CompletedSteps)
+            }
+            return $data
         } catch {}
     }
     
@@ -20,9 +26,9 @@ function Get-LXProgress {
     return [PSCustomObject]@{
         TotalXP = 0
         Level = 1
-        Title = "PowerShell Novize"
+        Title = "PowerShell Novize [Rang 1]"
         CompletedLessons = @()
-        CompletedSteps = @{}
+        CompletedSteps = @()
         LastActive = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
     }
 }
@@ -155,7 +161,7 @@ function Invoke-LXQuestSession {
             }
 
             if ($isMatch) {
-                # Execute the command so user sees the real output
+                # Execute the command directly to console host
                 Write-Host ""
                 Write-Host "  [Ausgabe von PowerShell]:" -ForegroundColor DarkGray
                 Write-Host "  ---------------------------------------------------------------" -ForegroundColor DarkGray
@@ -173,8 +179,9 @@ function Invoke-LXQuestSession {
                 # Award XP
                 $xpEarned = 25
                 $progress.TotalXP += $xpEarned
-                if (-not $progress.CompletedSteps) { $progress.CompletedSteps = @{} }
-                $progress.CompletedSteps[$stepKey] = $true
+                if ($progress.CompletedSteps -notcontains $stepKey) {
+                    $progress.CompletedSteps += $stepKey
+                }
                 Save-LXProgress -Progress $progress
 
                 Write-LXInfo "+$xpEarned XP erhalten! (Gesamt: $($progress.TotalXP) XP | Rang: $($progress.Title))"
