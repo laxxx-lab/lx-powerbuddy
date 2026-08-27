@@ -34,17 +34,17 @@ function Save-LXProgress {
     
     # Update title based on XP
     if ($Progress.TotalXP -ge 1500) {
-        $Progress.Title = "PowerShell Legende 👑"
+        $Progress.Title = "PowerShell Legende [Rang 6]"
     } elseif ($Progress.TotalXP -ge 1000) {
-        $Progress.Title = "PowerShell Großmeister 🧙‍♂️"
+        $Progress.Title = "PowerShell Grossmeister [Rang 5]"
     } elseif ($Progress.TotalXP -ge 600) {
-        $Progress.Title = "Pipeline Magier ⚡"
+        $Progress.Title = "Pipeline Magier [Rang 4]"
     } elseif ($Progress.TotalXP -ge 300) {
-        $Progress.Title = "Skript Ritter 🛡️"
+        $Progress.Title = "Skript Ritter [Rang 3]"
     } elseif ($Progress.TotalXP -ge 100) {
-        $Progress.Title = "Cmdlet Lehrling 📜"
+        $Progress.Title = "Cmdlet Lehrling [Rang 2]"
     } else {
-        $Progress.Title = "PowerShell Novize 🌱"
+        $Progress.Title = "PowerShell Novize [Rang 1]"
     }
 
     $Progress | ConvertTo-Json -Depth 5 | Set-Content -Path $file -Encoding UTF8
@@ -55,7 +55,7 @@ function Reset-LXProgressData {
     if (Test-Path $file) {
         Remove-Item $file -Force -ErrorAction SilentlyContinue
     }
-    Write-LXSuccess "Fortschritt wurde erfolgreich zurückgesetzt!"
+    Write-LXSuccess "Fortschritt wurde erfolgreich zurueckgesetzt!"
 }
 
 function Invoke-LXQuestSession {
@@ -76,14 +76,14 @@ function Invoke-LXQuestSession {
     }
 
     if (-not $selectedLesson) {
-        Write-LXBanner -Title "LX POWERBUDDY - QUESTS" -Subtitle "Wähle deine Trainings-Mission"
-        Write-Host "  Verfügbare Level:" -ForegroundColor Yellow
+        Write-LXBanner -Title "LX POWERBUDDY - QUESTS" -Subtitle "Waehle deine Trainings-Mission"
+        Write-Host "  Verfuegbare Level:" -ForegroundColor Yellow
         Write-Host ""
         
         $progress = Get-LXProgress
         foreach ($l in $allLessons) {
             $isDone = $progress.CompletedLessons -contains $l.Id
-            $badge = if ($isDone) { "🏆 [ERLEDIGT]" } else { "⏳ [OFFEN]" }
+            $badge = if ($isDone) { "[ERLEDIGT]" } else { "[OFFEN]" }
             $badgeColor = if ($isDone) { "Green" } else { "Cyan" }
             
             Write-Host "   $($l.Order). " -NoNewline -ForegroundColor Yellow
@@ -101,25 +101,25 @@ function Invoke-LXQuestSession {
     # Run the selected lesson
     $progress = Get-LXProgress
     Write-LXBanner -Title "QUEST: $($selectedLesson.Title)" -Subtitle "$($selectedLesson.Steps.Count) Schritte zum Erfolg"
-    Write-LXBox -Title "Missions-Briefing" -Content "$($selectedLesson.Description)`n`nTipps:`n- Tippe 'hint' oder 'hilfe', falls du nicht weiterweißt.`n- Tippe 'skip', um einen Schritt zu überspringen.`n- Tippe 'exit', um die Quest zu pausieren." -Color Cyan -Icon "🎯"
+    Write-LXBox -Title "Missions-Briefing" -Content "$($selectedLesson.Description)`n`nTipps:`n- Tippe 'hint' oder 'hilfe', falls du nicht weiterweisst.`n- Tippe 'skip', um einen Schritt zu ueberspringen.`n- Tippe 'exit', um die Quest zu pausieren." -Color Cyan -Icon "[Info]"
 
     $stepIndex = 1
     foreach ($step in $selectedLesson.Steps) {
         $stepKey = "$($selectedLesson.Id)_$($step.StepNumber)"
-        Write-Host "─────────────────────────────────────────────────────────────────" -ForegroundColor DarkCyan
+        Write-Host "-----------------------------------------------------------------" -ForegroundColor DarkCyan
         Write-Host "  Schritt $($step.StepNumber) von $($selectedLesson.Steps.Count): " -NoNewline -ForegroundColor Yellow
         Write-Host "$($step.Title)" -ForegroundColor White
-        Write-Host "─────────────────────────────────────────────────────────────────" -ForegroundColor DarkCyan
+        Write-Host "-----------------------------------------------------------------" -ForegroundColor DarkCyan
         Write-Host ""
         
-        Write-LXBox -Title "Wissen & Theorie" -Content $step.Theory -Color DarkCyan -Icon "📖"
-        Write-LXBox -Title "Deine Aufgabe" -Content $step.Task -Color Yellow -Icon "⚔️"
+        Write-LXBox -Title "Wissen & Theorie" -Content $step.Theory -Color DarkCyan -Icon "[Theorie]"
+        Write-LXBox -Title "Deine Aufgabe" -Content $step.Task -Color Yellow -Icon "[Mission]"
 
         $stepDone = $false
         $attempts = 0
 
         while (-not $stepDone) {
-            Write-Host "  [PS-Buddy-Prompt] ➜ " -NoNewline -ForegroundColor Green
+            Write-Host "  [PS-Buddy-Prompt] > " -NoNewline -ForegroundColor Green
             $userInput = Read-Host
             $inputTrimmed = $userInput.Trim()
 
@@ -134,8 +134,8 @@ function Invoke-LXQuestSession {
                 continue
             }
 
-            if ($inputTrimmed -in @("skip", "überspringen")) {
-                Write-LXWarning "Schritt übersprungen."
+            if ($inputTrimmed -in @("skip", "ueberspringen", "überspringen")) {
+                Write-LXWarning "Schritt uebersprungen."
                 $stepDone = $true
                 break
             }
@@ -162,7 +162,7 @@ function Invoke-LXQuestSession {
                 try {
                     Invoke-Expression $inputTrimmed
                 } catch {
-                    Write-LXWarning "Befehl erzeugte einen Fehler bei der Testausführung: $_"
+                    Write-LXWarning "Befehl erzeugte einen Fehler bei der Testausfuehrung: $_"
                 }
                 Write-Host "  ---------------------------------------------------------------" -ForegroundColor DarkGray
                 Write-Host ""
@@ -181,7 +181,7 @@ function Invoke-LXQuestSession {
                 Write-Host ""
                 $stepDone = $true
             } else {
-                Write-LXError "Noch nicht ganz richtig! Versuch es noch einmal oder tippe 'hint' für Hilfe."
+                Write-LXError "Noch nicht ganz richtig! Versuch es noch einmal oder tippe 'hint' fuer Hilfe."
                 if ($attempts -ge 2) {
                     Write-LXInfo "Tipp zur Erinnerung: $($step.Hint)"
                 }
@@ -198,10 +198,10 @@ function Invoke-LXQuestSession {
         Save-LXProgress -Progress $progress
         
         Write-Host ""
-        Write-Host "  🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉" -ForegroundColor Yellow
+        Write-Host "  ===============================================================" -ForegroundColor Yellow
         Write-LXSuccess "LEKTION ABGESCHLOSSEN: $($selectedLesson.Title)"
         Write-LXSuccess "Level-Bonus: +$bonusXP XP!"
-        Write-Host "  🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉" -ForegroundColor Yellow
+        Write-Host "  ===============================================================" -ForegroundColor Yellow
         Write-Host ""
     }
 }
