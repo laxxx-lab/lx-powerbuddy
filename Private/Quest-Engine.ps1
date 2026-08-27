@@ -1,4 +1,4 @@
-﻿# Private/Quest-Engine.ps1
+# Private/Quest-Engine.ps1
 
 function Get-LXProgressFilePath {
     $dir = Join-Path -Path $HOME -ChildPath ".lxpowerbuddy"
@@ -160,7 +160,7 @@ function Invoke-LXQuestSession {
                 Write-Host "  [Ausgabe von PowerShell]:" -ForegroundColor DarkGray
                 Write-Host "  ---------------------------------------------------------------" -ForegroundColor DarkGray
                 try {
-                    Invoke-Expression $inputTrimmed
+                    Invoke-Expression $inputTrimmed | Out-Host
                 } catch {
                     Write-LXWarning "Befehl erzeugte einen Fehler bei der Testausfuehrung: $_"
                 }
