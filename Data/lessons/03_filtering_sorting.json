@@ -3,7 +3,7 @@
     "Description":  "Lerne Where-Object, Vergleichsoperatoren (-eq, -gt, -like) und Sort-Object kennen.",
     "Steps":  [
                   {
-                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Where-Object|where|\\?)\\s+.*(ProcessName|Name)\\s+-eq\\s+[\u0027\"]?(explorer|powershell)[\u0027\"]?.*$",
+                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Where-Object|where|\\?)\\s+(-Property\\s+)?(ProcessName|Name)\\s+-eq\\s+[\u0027\"\u0027]?(explorer|powershell)[\u0027\"\u0027]?\\s*$",
                       "Theory":  "PowerShell nutzt für Vergleiche keine Symbole wie \u003e oder ==, sondern Buchstaben-Kürzel:\n  -eq (equal / gleich)\n  -ne (not equal / ungleich)\n  -gt (greater than / größer als)\n  -lt (less than / kleiner als)\n  -like (Wildcard-Vergleich z.B. \u0027sv*\u0027)\n  -match (Regulärer Ausdruck)",
                       "ExplanationAfter":  "Stark! Where-Object lässt nur Objekte durch die Pipeline, die der Bedingung entsprechen.",
                       "StepNumber":  1,
@@ -12,7 +12,7 @@
                       "Task":  "Filtere Prozesse, deren Name \u0027powershell\u0027 oder \u0027explorer\u0027 ist mit: Get-Process | Where-Object ProcessName -eq \u0027explorer\u0027"
                   },
                   {
-                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Where-Object|where|\\?)\\s+.*Handles\\s+-gt\\s+500.*$",
+                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Where-Object|where|\\?)\\s+(-Property\\s+)?Handles\\s+-gt\\s+500\\s*$",
                       "Theory":  "Weil PowerShell Zahlen als echte Integer/Double behandelt, kannst du mathematische Vergleiche direkt anstellen (z.B. CPU \u003e 0 oder Handles \u003e 500).",
                       "ExplanationAfter":  "Sauber! Ohne Parsing, ohne Textschnitt - sofort die richtigen Prozesse.",
                       "StepNumber":  2,
@@ -21,7 +21,7 @@
                       "Task":  "Finde Prozesse mit mehr als 500 Handles: Get-Process | Where-Object Handles -gt 500"
                   },
                   {
-                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Sort-Object|sort)\\s+.*Id\\s+-Descending.*$",
+                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Sort-Object|sort)\\s+(-Property\\s+)?Id\\s+-Descending\\s*$",
                       "Theory":  "Mit \u0027Sort-Object\u0027 (Alias: sort) kannst du Objekte nach beliebigen Feldern sortieren. Mit dem Schalter \u0027-Descending\u0027 kehrst du die Reihenfolge um (größte zuerst).",
                       "ExplanationAfter":  "Perfekt! Jetzt kombinierst du gleich filtern, sortieren und auswählen.",
                       "StepNumber":  3,
@@ -30,7 +30,7 @@
                       "Task":  "Sortiere alle Prozesse absteigend nach ihrer Id: Get-Process | Sort-Object Id -Descending"
                   },
                   {
-                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Where-Object|where|\\?).*\\|\\s*(Sort-Object|sort).*\\|\\s*(Select-Object|select).*$",
+                      "ExpectedCommandPattern":  "^(Get-Process|ps|gps)\\s*\\|\\s*(Where-Object|where|\\?)\\s+(-Property\\s+)?Handles\\s+-gt\\s+300\\s*\\|\\s*(Sort-Object|sort)\\s+(-Property\\s+)?Handles\\s+-Descending\\s*\\|\\s*(Select-Object|select)\\s+(-First\\s+5\\s+)?(Name,\\s*Handles|Handles,\\s*Name)(\\s+-First\\s+5)?\\s*$",
                       "Theory":  "Die wahre Stärke von PowerShell entsteht, wenn du mehrere Cmdlets aneinanderreihst:\nQuelle -\u003e Filter -\u003e Sortierung -\u003e Format/Auswahl",
                       "ExplanationAfter":  "Bravo! Das ist genau die Art von Pipeline, mit der System-Administratoren und Entwickler täglich arbeiten!",
                       "StepNumber":  4,
